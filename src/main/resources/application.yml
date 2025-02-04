@@ -1,0 +1,25 @@
+keycloak:
+  server-url: http://localhost:8080
+  realm: gestionfilekeycloakrealm
+  client_id: my_app_client
+
+
+
+springdoc:
+  api-docs:
+    path: /api-docs  # Définit le chemin pour les métadonnées OpenAPI
+  swagger-ui:
+    path: /swagger-ui.html  # Définit le chemin pour Swagger UI
+  show-actuator: true  # Affiche les informations d'Actuator dans Swagger si Actuator est activé
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          set-uri: http://localhost:8080/realms/gestionfilekeycloakrealm/protocol/openid-connect/certs
+
+server:
+  port: 8082
+
+acceptedTypes:
+  type: image/jpeg,image/png,application/pdf;
