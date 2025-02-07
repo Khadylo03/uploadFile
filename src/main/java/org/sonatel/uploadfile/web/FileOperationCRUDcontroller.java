@@ -1,12 +1,15 @@
 package org.sonatel.uploadfile.web;
 
 import org.sonatel.uploadfile.domain.entity.FileEntity;
+import org.sonatel.uploadfile.model.dto.request.FileRequestDTO;
 import org.sonatel.uploadfile.service.FileService;
+import org.sonatel.uploadfile.service.mapper.FileMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/files")
@@ -18,19 +21,21 @@ public class FileOperationCRUDcontroller {
 
 
 
+    @GetMapping
+    public ResponseEntity<List<FileRequestDTO>> getAllFiles() {
+        List<FileRequestDTO> fileDTOs = fileService.getAllFiles()
+                .stream()
+                .map(FileMapper.INSTANCE::toDTO)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(fileDTOs);
+    }
+
 //    @GetMapping
 //    public ResponseEntity<List<FileEntity>> getAllFiles() {
-//      List<FileEntity> files = fileService.getAllFiles();
-//      //Je veux retourner un objet de type FileResponse
-//      //FileEntity fileEntity = FileMapper.toResponse(files);
-//      return ResponseEntity.ok(fileEntity);
+//        List<FileEntity> files = fileService.getAllFiles();
+//        return ResponseEntity.ok(files);
 //    }
-
-    @GetMapping
-    public ResponseEntity<List<FileEntity>> getAllFiles() {
-        List<FileEntity> files = fileService.getAllFiles();
-        return ResponseEntity.ok(files);
-    }
 
     /**
      * Endpoint pour récupérer un fichier par ID.

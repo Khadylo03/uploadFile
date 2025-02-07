@@ -23,19 +23,15 @@ public class DatabaseStorageStrategy implements IStorageStrategy {
 
     @Override
     public FileEntity saveFile(MultipartFile file) throws IOException {
-        // Vérification si le fichier n'est pas vide
-//        if (file.isEmpty()) {
-//            throw new IllegalArgumentException("Le fichier est vide.");
-//        }
 
         // Vérifier le type de fichier
         if (!fileValidationService.ValidTypeFile(new FileEntity(file))) {
-            throw new IllegalArgumentException("Type de fichier non valide");
+            throw new RuntimeException("Type de fichier non valide");
         }
 
         // Vérifier la taille du fichier
         if (!fileValidationService.ValidSizeFile(new FileEntity(file))) {
-            throw new IllegalArgumentException("Fichier trop volumineux");
+            throw new RuntimeException("Fichier trop volumineux");
         }
 
         // Création de l'entité FileEntity

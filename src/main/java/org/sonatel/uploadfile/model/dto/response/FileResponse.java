@@ -14,7 +14,7 @@ public class FileResponse {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createtime;
-
-    @Lob
-    private byte[] filedata;
+//
+//    @Lob
+//    private byte[] filedata;
 }

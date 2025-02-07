@@ -33,7 +33,6 @@ public class FileController {
 
         IStorageStrategy strategy = storageStrategyFactory.getStrategy(storageType);
 
-        System.out.println(strategy);
 
         if (strategy == null) {
             throw new IllegalArgumentException("Type de stockage invalide.");

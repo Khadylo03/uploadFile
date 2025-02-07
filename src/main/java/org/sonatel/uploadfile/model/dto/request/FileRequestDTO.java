@@ -1,21 +1,35 @@
 package org.sonatel.uploadfile.model.dto.request;
 
-import jakarta.persistence.Lob;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
 
 public class FileRequestDTO {
-
+    private int id;
     private String filename;
     private String filetype;
     private Long filesize;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date createtime;
 
-    @Lob
-    private byte[] filedata;
+    public FileRequestDTO() {
+    }
+
+    public FileRequestDTO(int id, String filename, String filetype, Long filesize, Date createtime) {
+        this.id = id;
+        this.filename = filename;
+        this.filetype = filetype;
+        this.filesize = filesize;
+        this.createtime = createtime;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFilename() {
         return filename;
@@ -47,13 +61,5 @@ public class FileRequestDTO {
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
-    }
-
-    public byte[] getFiledata() {
-        return filedata;
-    }
-
-    public void setFiledata(byte[] filedata) {
-        this.filedata = filedata;
     }
 }
